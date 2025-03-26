@@ -12,6 +12,7 @@ import NewsSection from "@/components/news-section";
 import SiteFooter from "@/components/side-footer";
 import HeroBanner from "@/components/hero-banner";
 import { useEffect, useState } from "react";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +34,7 @@ export default function Home() {
 	return (
 		<div className="min-h-screen flex flex-col">
 			{/* Navigation */}
-			<header
+			{/* <header
 				className={`fixed top-0 left-0 right-0 z-30 w-full transition-all duration-300 ${
 					isScrolled ? "bg-white shadow-md" : "bg-transparent"
 				}`}
@@ -90,7 +91,8 @@ export default function Home() {
 						<Menu className="h-6 w-6" />
 					</button>
 				</div>
-			</header>
+			</header> */}
+			<Navbar />
 
 			{/* Main Content */}
 			<main className="flex-grow">
