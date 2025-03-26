@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Menu, MessageCircle } from "lucide-react";
@@ -9,46 +10,83 @@ import OnlineLearningSection from "@/components/online-learning-section";
 import TestCenterSection from "@/components/test-center-section";
 import NewsSection from "@/components/news-section";
 import SiteFooter from "@/components/side-footer";
+import HeroBanner from "@/components/hero-banner";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+	const [isScrolled, setIsScrolled] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 100) {
+				setIsScrolled(true);
+			} else {
+				setIsScrolled(false);
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 	return (
 		<div className="min-h-screen flex flex-col">
 			{/* Navigation */}
-			<header className="sticky top-0 bg-white z-40 w-full shadow-sm">
-				<div className="container mx-auto px-4 py-4 flex justify-between items-center">
-					<div className="flex items-center">
-						<Link href="/" className="font-bold text-2xl">
-							<span className="text-black">THE</span>{" "}
-							<span className="text-black">CLIP</span>
-						</Link>
+			<header
+				className={`fixed top-0 left-0 right-0 z-30 w-full transition-all duration-300 ${
+					isScrolled ? "bg-white shadow-md" : "bg-transparent"
+				}`}
+			>
+				<div className="container mx-auto h-28 px-4 py-4 flex justify-between items-center">
+					<div
+						className={`flex items-center border${
+							isScrolled ? "text-black" : "text-white"
+						} `}
+					>
+						<Image
+							src={`${
+								isScrolled
+									? "https://www.theclip.net/images/logo_b.png"
+									: "https://www.theclip.net/images/logo_w.png"
+							}`}
+							alt="The Clip Logo"
+							width={150}
+							height={50}
+						/>
 					</div>
-					<nav className="hidden md:flex space-x-8">
+					<nav
+						className={`hidden md:flex space-x-24 font-bold text-2xl ${
+							isScrolled ? "text-black" : "text-white"
+						} `}
+					>
 						<Link
 							href="/brand-story"
-							className="text-black hover:text-gray-600"
+							className=" hover:text-gray-600"
 						>
-							Brand Story
+							브랜드 이야기
 						</Link>
 						<Link
 							href="/educational-program"
-							className="text-black hover:text-gray-600"
+							className=" hover:text-gray-600"
 						>
-							Educational Program
+							교육프로그램
 						</Link>
-						<Link
-							href="/news"
-							className="text-black hover:text-gray-600"
-						>
-							THE CLIP News
+						<Link href="/news" className=" hover:text-gray-600">
+							THE CLIP 소식
 						</Link>
 						<Link
 							href="/customer-service"
-							className="text-black hover:text-gray-600"
+							className="hover:text-gray-600"
 						>
-							customer service center
+							고객센터
 						</Link>
 					</nav>
-					<button className="md:hidden">
+					<button
+						className={`${
+							isScrolled ? "text-black" : "text-white"
+						} `}
+					>
 						<Menu className="h-6 w-6" />
 					</button>
 				</div>
@@ -57,6 +95,8 @@ export default function Home() {
 			{/* Main Content */}
 			<main className="flex-grow">
 				{/* Hero Section */}
+				<HeroBanner />
+
 				<section className="bg-[#f0f5ff] py-12 md:py-20 relative">
 					<div className="container mx-auto px-4">
 						<div className="grid grid-cols-1 lg:grid-cols-2 p-5 md:pl-28">
