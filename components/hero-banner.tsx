@@ -39,11 +39,11 @@ export default function HeroBanner() {
 						전국
 						<span className="relative inline-block ml-4">
 							1타 학원들의 선택
-							<span className="absolute bottom-0 left-0 right-0 h-1 bg-teal-400 animate-line"></span>
+							<span className="absolute bottom-0 left-0 right-0 h-3 bg-teal-400 animate-line"></span>
 						</span>
 					</h1>
 
-					<div className="space-y-4 text-lg md:text-3xl animate-content">
+					<div className="space-y-4 text-lg md:text-4xl font-extralight animate-content">
 						<p>한 가지 기준으로 보면 여러 곳이 보이지만</p>
 						<p>열 가지 기준으로 보면 THE CLIP만 보입니다.</p>
 						<p>초중등 영어는 THE CLIP이 정답입니다.</p>
