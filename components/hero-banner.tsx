@@ -24,8 +24,7 @@ export default function HeroBanner() {
 			<div
 				className="absolute inset-0 bg-cover bg-center animate-zoomIn"
 				style={{
-					backgroundImage:
-						"url(https://www.theclip.net/images/img_main_visual01.png)",
+					backgroundImage: "url(/assets/img_main_visual01.png)",
 				}}
 			></div>
 
