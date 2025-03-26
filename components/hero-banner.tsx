@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import {
 	Play,
 	Pause,
@@ -9,22 +8,44 @@ import {
 	ChevronRight,
 	ChevronDown,
 } from "lucide-react";
+import { set } from "react-hook-form";
 
 export default function HeroBanner() {
+	const images = [
+		"/assets/img_main_visual01.png",
+		"https://www.theclip.net/images/img_main_visual02.png",
+	];
+
+	const [currentImage, setCurrentImage] = useState(0);
 	const [isPlaying, setIsPlaying] = useState(true);
+	const [textKey, setTextKey] = useState(0);
+	const [ImageKey, setImageKey] = useState(1);
 
 	// Toggle play/pause
 	const togglePlayPause = () => {
 		setIsPlaying(!isPlaying);
 	};
 
+	// Auto-switch background images and trigger text animation
+	useEffect(() => {
+		if (!isPlaying) return;
+		const interval = setInterval(() => {
+			setCurrentImage((prev) => (prev + 1) % images.length);
+			setTextKey((prev) => prev + 1); // Change text key to trigger reanimation
+			setImageKey((prev) => prev + 1); // Change image key to trigger reanimation
+		}, 5000);
+		return () => clearInterval(interval);
+	}, [isPlaying]);
+
 	return (
 		<section className="relative h-screen overflow-hidden">
-			{/* Background image with zoom-in animation */}
+			{/* Background images carousel */}
 			<div
-				className="absolute inset-0 bg-cover bg-center animate-zoomIn"
+				className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 animate-zoomIn"
+				key={ImageKey}
 				style={{
-					backgroundImage: "url(/assets/img_main_visual01.png)",
+					backgroundImage: `url(${images[currentImage]})`,
+					opacity: 1,
 				}}
 			></div>
 
@@ -32,7 +53,10 @@ export default function HeroBanner() {
 			<div className="absolute inset-0 bg-black/40"></div>
 
 			{/* Content */}
-			<div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-white">
+			<div
+				key={textKey}
+				className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-white"
+			>
 				<div className="text-center max-w-3xl">
 					<h1 className="text-4xl md:text-7xl font-bold mb-8 animate-heading">
 						전국
