@@ -8,12 +8,11 @@ import {
 	ChevronRight,
 	ChevronDown,
 } from "lucide-react";
-import { set } from "react-hook-form";
 
 export default function HeroBanner() {
 	const images = [
 		"/assets/img_main_visual01.png",
-		"https://www.theclip.net/images/img_main_visual02.png",
+		"/assets/img_main_visual02.png",
 	];
 
 	const [currentImage, setCurrentImage] = useState(0);
